@@ -19,15 +19,15 @@ const ProductCard = ({ name, price, imageUrl }: ProductCardProps) => {
           className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>
-      <CardHeader className="p-4 pb-0">
-        <h3 className="text-lg font-semibold">{name}</h3>
+      <CardHeader className="p-3 pb-0">
+        <h3 className="text-base font-semibold">{name}</h3>
       </CardHeader>
-      <CardContent className="p-4 pt-2">
-        <p className="text-xl font-bold text-primary">{price} ₽</p>
+      <CardContent className="p-3 pt-1">
+        <p className="text-lg font-bold text-primary">{price} ₽</p>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
-        <Button className="w-full gap-2">
-          <ShoppingCart className="h-4 w-4" />
+      <CardFooter className="p-3 pt-0">
+        <Button className="w-full gap-1 text-sm" size="sm">
+          <ShoppingCart className="h-3.5 w-3.5" />
           В корзину
         </Button>
       </CardFooter>
