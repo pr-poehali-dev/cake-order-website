@@ -1,6 +1,8 @@
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
 import { useIsMobile } from "@/hooks/use-mobile";
+import MobileMenu from "@/components/MobileMenu";
+import { ShoppingBag, Gift, Calendar, Clock } from "lucide-react";
 
 // Примерные данные товаров (в реальном приложении это будет приходить с бэкенда)
 const products = [
@@ -42,6 +44,30 @@ const products = [
   }
 ];
 
+// Данные о наших услугах
+const services = [
+  {
+    icon: <ShoppingBag className="h-10 w-10 text-primary" />,
+    title: "Широкий ассортимент",
+    description: "Более 100 видов десертов на любой вкус"
+  },
+  {
+    icon: <Gift className="h-10 w-10 text-primary" />,
+    title: "Индивидуальные заказы",
+    description: "Создаем уникальные десерты по вашим пожеланиям"
+  },
+  {
+    icon: <Calendar className="h-10 w-10 text-primary" />,
+    title: "Праздничные наборы",
+    description: "Специальные предложения к праздникам"
+  },
+  {
+    icon: <Clock className="h-10 w-10 text-primary" />,
+    title: "Быстрая доставка",
+    description: "Доставим в течение 3 часов по городу"
+  }
+];
+
 const Index = () => {
   const isMobile = useIsMobile();
 
@@ -50,22 +76,26 @@ const Index = () => {
       <header className="bg-primary py-4 text-primary-foreground">
         <div className="container flex flex-col items-center justify-between space-y-2 px-4 sm:flex-row sm:space-y-0">
           <h1 className="text-2xl font-bold">Сладкий Мир</h1>
-          <nav className="w-full overflow-x-auto sm:w-auto">
-            <ul className="flex min-w-max space-x-4 sm:space-x-6">
-              <li>
-                <a href="/" className="hover:underline">Главная</a>
-              </li>
-              <li>
-                <a href="/catalog" className="hover:underline">Каталог</a>
-              </li>
-              <li>
-                <a href="/about" className="hover:underline">О нас</a>
-              </li>
-              <li>
-                <a href="/contacts" className="hover:underline">Контакты</a>
-              </li>
-            </ul>
-          </nav>
+          {isMobile ? (
+            <MobileMenu />
+          ) : (
+            <nav className="w-full overflow-x-auto sm:w-auto">
+              <ul className="flex min-w-max space-x-4 sm:space-x-6">
+                <li>
+                  <a href="/" className="hover:underline">Главная</a>
+                </li>
+                <li>
+                  <a href="/catalog" className="hover:underline">Каталог</a>
+                </li>
+                <li>
+                  <a href="/about" className="hover:underline">О нас</a>
+                </li>
+                <li>
+                  <a href="/contacts" className="hover:underline">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+          )}
         </div>
       </header>
 
@@ -75,6 +105,43 @@ const Index = () => {
           description="Изысканные десерты ручной работы для любого события" 
         />
 
+        {/* Информационный блок о сайте и услугах */}
+        <div className="mb-12 rounded-xl bg-gradient-to-r from-secondary/50 to-accent/30 p-6 shadow-md">
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-6 text-center">
+              <h2 className="mb-3 text-2xl font-bold text-primary">Добро пожаловать в мир сладких удовольствий!</h2>
+              <p className="text-muted-foreground">
+                Мы создаем кондитерские шедевры с любовью и вниманием к каждой детали. 
+                Наши десерты не только восхитительно вкусные, но и станут прекрасным украшением любого праздника.
+              </p>
+            </div>
+            
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
+              {services.map((service, index) => (
+                <div 
+                  key={index} 
+                  className="flex flex-col items-center rounded-lg bg-background p-4 text-center shadow-sm transition-all hover:shadow-md"
+                >
+                  <div className="mb-3 rounded-full bg-secondary/30 p-3">
+                    {service.icon}
+                  </div>
+                  <h3 className="mb-1 text-lg font-semibold">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground">{service.description}</p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-6 text-center">
+              <p className="italic text-muted-foreground">
+                "Мы превращаем обычные ингредиенты в необыкновенные десерты, 
+                которые создают особое настроение и добавляют сладости в вашу жизнь."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2 className="mb-6 text-center text-2xl font-bold text-primary">Наши популярные десерты</h2>
+        
         <div className={`grid gap-4 ${
           isMobile 
             ? "grid-cols-1 sm:grid-cols-2" 
