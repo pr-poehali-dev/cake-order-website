@@ -1,5 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Примерные данные товаров (в реальном приложении это будет приходить с бэкенда)
 const products = [
@@ -42,13 +43,15 @@ const products = [
 ];
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="min-h-screen bg-background pb-16">
       <header className="bg-primary py-4 text-primary-foreground">
-        <div className="container flex items-center justify-between">
+        <div className="container flex flex-col items-center justify-between space-y-2 px-4 sm:flex-row sm:space-y-0">
           <h1 className="text-2xl font-bold">Сладкий Мир</h1>
-          <nav>
-            <ul className="flex space-x-6">
+          <nav className="w-full overflow-x-auto sm:w-auto">
+            <ul className="flex min-w-max space-x-4 sm:space-x-6">
               <li>
                 <a href="/" className="hover:underline">Главная</a>
               </li>
@@ -66,13 +69,17 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="container py-8">
+      <main className="container px-4 py-8">
         <PageHeader 
           title="Кондитерские изделия на заказ" 
           description="Изысканные десерты ручной работы для любого события" 
         />
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className={`grid gap-4 ${
+          isMobile 
+            ? "grid-cols-1 sm:grid-cols-2" 
+            : "grid-cols-2 md:grid-cols-3"
+        }`}>
           {products.map((product) => (
             <ProductCard
               key={product.id}
@@ -86,7 +93,7 @@ const Index = () => {
       </main>
 
       <footer className="bg-secondary py-8 text-secondary-foreground">
-        <div className="container">
+        <div className="container px-4">
           <div className="mb-6 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div>
               <h3 className="mb-4 text-lg font-bold">Сладкий Мир</h3>
